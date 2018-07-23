@@ -86,9 +86,12 @@ RENAME TABLE language1 TO language;
 ALTER TABLE `language` CHANGE  `name1` `name` VARCHAR(255) NOT NULL;
 
 SELECT title FROM film 
-WHERE (title LIKE 'K%' AND 'Q%')
-AND language_id = (SELECT language_id FROM language where name='English')
-
+WHERE language_id in
+	(SELECT language_id 
+    FROM language 
+    where name='English')
+AND (title LIKE 'K%') OR (title LIKE 'Q%');
+ 
 
 
 
